@@ -121,9 +121,9 @@ def bootstrap(y,y2,t,yerror,allm,allA0):
     #step 1 - residuals - not sure if the errors of residuals are right or not
     for j in range(3000):
         residual = y-y2
-        plt.plot(t,residual,'o')
+        # plt.plot(t,residual,'o')
         residualerror = yerror
-        plt.errorbar(t,residual,yerr=residualerror, ls = 'none')
+        # plt.errorbar(t,residual,yerr=residualerror, ls = 'none')
 
         #step 2 - label points - already done from eg y[0] is first data point
 
@@ -311,8 +311,6 @@ allconstant = []
 allm, allA0 = bootstrap(y,y2,x,yerror,allindex,allconstant)
 
 # the first histogram is always messed up, not sure why
-y,x,_=plt.hist(allm, bins = 50)
-plt.show()
 y,x,_=plt.hist(allindex, bins = 50)
 plt.show()
 y,x,_=plt.hist(allconstant, bins = 50)
