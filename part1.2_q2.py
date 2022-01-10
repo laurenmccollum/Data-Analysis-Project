@@ -181,53 +181,53 @@ index2 = np.unravel_index(np.argmin(chi2,axis=None),chi2.shape)
 index3 = np.unravel_index(np.argmin(chi3,axis=None),chi3.shape)
 index4 = np.unravel_index(np.argmin(chi4,axis=None),chi4.shape)
 
-plt.plot(gridm1,chi1[index1[0],:])
+plt.plot(gridm1,chi1[:,index1[1]])
 plt.axhline(y=(minchi1+2.3), color='r', linestyle='-')
-sigma1 = np.argwhere(np.diff(np.sign(chi1[index1[0],:] - (minchi1+2.3)))).flatten()
+sigma1 = np.argwhere(np.diff(np.sign(chi1[:,index1[1]] - (minchi1+2.3)))).flatten()
 print('decayconstant1', gridm1[index1[0]], '+/-',np.abs(gridm1[index1[0]]-((gridm1[sigma1[0]]+gridm1[sigma1[1]])/2)))
 plt.show()
 
 plt.plot(gridA01,chi1[index1[0],:])
 plt.axhline(y=(minchi1+2.3), color='r', linestyle='-')
-print('A01', gridA01[index1[0]], '+/-', np.abs(gridA01[index1[0]]-((gridA01[sigma1[0]]+gridA01[sigma1[1]])/2)))
+sigma1 = np.argwhere(np.diff(np.sign(chi1[index1[0],:] - (minchi1+2.3)))).flatten()
+print('A01', gridA01[index1[1]], '+/-', np.abs(gridA01[index1[1]]-((gridA01[sigma1[0]]+gridA01[sigma1[1]])/2)))
 plt.show()
 
-plt.plot(gridm2,chi2[index2[0],:])
+plt.plot(gridm2,chi2[:,index2[1]])
 plt.axhline(y=(minchi2+2.3), color='r', linestyle='-')
-sigma2 = np.argwhere(np.diff(np.sign(chi2[index2[0],:] - (minchi2+2.3)))).flatten()
+sigma2 = np.argwhere(np.diff(np.sign(chi2[:,index2[1]] - (minchi2+2.3)))).flatten()
 print('decayconstant2', gridm2[index2[0]], '+/-', np.abs(gridm2[index2[0]]-((gridm2[sigma2[0]]+gridm2[sigma2[1]])/2)))
 plt.show()
 
 plt.plot(gridA02,chi2[index2[0],:])
 plt.axhline(y=(minchi2+2.3), color='r', linestyle='-')
-print('A02', gridA02[index2[0]], '+/-', np.abs(gridA02[index2[0]]-((gridA02[sigma2[0]]+gridA02[sigma2[1]])/2)))
+sigma2 = np.argwhere(np.diff(np.sign(chi2[index2[0],:] - (minchi2+2.3)))).flatten()
+print('A02', gridA02[index2[1]], '+/-', np.abs(gridA02[index2[1]]-((gridA02[sigma2[0]]+gridA02[sigma2[1]])/2)))
 plt.show()
 
-plt.plot(gridm3,chi3[index3[0],:])
+plt.plot(gridm3,chi3[:,index3[1]])
 plt.axhline(y=(minchi3+2.3), color='r', linestyle='-')
-sigma3 = np.argwhere(np.diff(np.sign(chi3[index3[0],:] - (minchi3+2.3)))).flatten()
+sigma3 = np.argwhere(np.diff(np.sign(chi3[:,index3[1]] - (minchi3+2.3)))).flatten()
 print('decayconstant3', gridm3[index3[0]], '+/-', np.abs(gridm3[index3[0]]-((gridm3[sigma3[0]]+gridm3[sigma3[1]])/2)))
 plt.show()
 
 plt.plot(gridA03,chi3[index3[0],:])
 plt.axhline(y=(minchi3+2.3), color='r', linestyle='-')
-print('A03', gridA03[index3[0]], '+/-', np.abs(gridA03[index3[0]]-((gridA03[sigma3[0]]+gridA03[sigma3[1]])/2)))
+sigma3 = np.argwhere(np.diff(np.sign(chi3[index3[0],:] - (minchi3+2.3)))).flatten()
+print('A03', gridA03[index3[1]], '+/-', np.abs(gridA03[index3[1]]-((gridA03[sigma3[0]]+gridA03[sigma3[1]])/2)))
 plt.show()
 
-plt.plot(gridm4,chi4[index4[0],:])
+plt.plot(gridm4,chi4[:,index4[1]])
 plt.axhline(y=(minchi4+2.3), color='r', linestyle='-')
-sigma4 = np.argwhere(np.diff(np.sign(chi4[index4[0],:] - (minchi4+2.3)))).flatten()
-sigma4 = sigma4[1]
-print('decayconstant4', gridm4[index4[0]], '+/-', np.abs(gridm4[index4[0]]-gridm4[sigma4]))
+sigma4 = np.argwhere(np.diff(np.sign(chi4[:,index4[1]] - (minchi4+2.3)))).flatten()
+print('decayconstant4', gridm4[index4[0]], '+/-', np.abs(gridm4[index4[0]]-((gridm4[sigma3[0]]+gridm4[sigma3[1]])/2)))
 plt.show()
 
 plt.plot(gridA04,chi4[index4[0],:])
 plt.axhline(y=(minchi4+2.3), color='r', linestyle='-')
-print('A04', gridA04[index4[0]], '+/-', np.abs(gridA04[index4[0]]-gridA04[sigma4]))
+sigma4 = np.argwhere(np.diff(np.sign(chi4[index4[0],:] - (minchi4+2.3)))).flatten()
+print('A04', gridA04[index4[1]], '+/-', np.abs(gridA04[index4[1]]-(gridA04[sigma3[0]]+gridA04[sigma3[1]])/2))
 plt.show()
-
-#need to change graphs so that i can find both intersection points
-#then the final uncertainty will be the average of those two uncertainties from the two points
 
 #point where its minimum chi - intersection point = uncertainty
 
