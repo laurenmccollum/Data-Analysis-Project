@@ -62,38 +62,53 @@ plt.show()
 
 steps = 5
 
-intervalm1 = 1e-5
-intervalA01 = 2
-intervalm2 = 1e-5
-intervalA02 = 1 
-intervalm3 = 1e-5
-intervalA03 = 2
-intervalm4 = 1e-5
-intervalA04 = 1.5
+intervalm11 = 0.0003 #good
+intervalm21 = 0.00003 #good
 
-gridm11 = np.arange(m11-intervalm1*steps,m11+(intervalm1)*(steps-0.5),intervalm1)
-gridm21 = np.arange(m21-intervalm1*steps,m21+(intervalm1)*(steps-0.5),intervalm1)
+intervalA011 = 10 #good
+intervalA021 = 5 #good
 
-gridm12 = np.arange(m12-intervalm2*steps,m12+(intervalm2)*(steps-0.5),intervalm2)
-gridm22 =np.arange(m22-intervalm2*steps,m22+(intervalm2)*(steps-0.5),intervalm2)
+intervalm12 = 0.0003 #good
+intervalm22 = 0.0001 #good
 
-gridm13 = np.arange(m13-intervalm3*steps,m13+(intervalm3)*(steps-0.5),intervalm3)
-gridm23 = np.arange(m23-intervalm3*steps,m23+(intervalm3)*(steps-0.5),intervalm3)
+intervalA012 = 5 #good
+intervalA022 = 2 #good
 
-gridm14 = np.arange(m14-intervalm4*steps,m14+(intervalm4)*(steps-0.5),intervalm4)
-gridm24 = np.arange(m24-intervalm4*steps,m24+(intervalm4)*(steps-0.5),intervalm4)
+intervalm13 = 0.0001 #good
+intervalm23 = 0.002 #good
 
-gridA011 = np.arange(A011-intervalA01*steps,A011+(intervalA01)*steps,intervalA01)
-gridA021 = np.arange(A021-intervalA01*steps,A021+(intervalA01)*steps,intervalA01)
+intervalA013 = 1 #good
+intervalA023 = 3 #good
 
-gridA012 = np.arange(A012-intervalA02*steps,A012+(intervalA02)*steps,intervalA02)
-gridA022 =np.arange(A022-intervalA02*steps,A022+(intervalA02)*(steps-0.5),intervalA02)
+intervalm14 = 0.0002 #good
+intervalm24 = 0.005 #good
 
-gridA013 = np.arange(A013-intervalA03*steps,A013+(intervalA03)*steps,intervalA03)
-gridA023 = np.arange(A023-intervalA03*steps,A023+(intervalA03)*steps,intervalA03)
+intervalA014 = 1 #good
+intervalA024 = 2 #good
 
-gridA014 = np.arange(A014-intervalA04*steps,A014+(intervalA04)*steps,intervalA04)
-gridA024 = np.arange(A024-intervalA04*steps,A024+(intervalA04)*steps,intervalA04)
+gridm11 = np.arange(m11-intervalm11*steps,m11+(intervalm11)*(steps-0.5),intervalm11)
+gridm21 = np.arange(m21-intervalm21*steps,m21+(intervalm21)*(steps-0.5),intervalm21)
+
+gridm12 = np.arange(m12-intervalm12*steps,m12+(intervalm12)*(steps-0.5),intervalm12)
+gridm22 =np.arange(m22-intervalm22*steps,m22+(intervalm22)*(steps-0.5),intervalm22)
+
+gridm13 = np.arange(m13-intervalm13*steps,m13+(intervalm13)*(steps-0.5),intervalm13)
+gridm23 = np.arange(m23-intervalm23*steps,m23+(intervalm23)*(steps-0.5),intervalm23)
+
+gridm14 = np.arange(m14-intervalm14*steps,m14+(intervalm14)*(steps-0.5),intervalm14)
+gridm24 = np.arange(m24-intervalm24*steps,m24+(intervalm24)*(steps-0.5),intervalm24)
+
+gridA011 = np.arange(A011-intervalA011*steps,A011+(intervalA011)*steps,intervalA011)
+gridA021 = np.arange(A021-intervalA021*steps,A021+(intervalA021)*steps,intervalA021)
+
+gridA012 = np.arange(A012-intervalA012*steps,A012+(intervalA012)*steps,intervalA012)
+gridA022 =np.arange(A022-intervalA022*steps,A022+(intervalA022)*(steps-0.5),intervalA022)
+
+gridA013 = np.arange(A013-intervalA013*steps,A013+(intervalA013)*steps,intervalA013)
+gridA023 = np.arange(A023-intervalA023*steps,A023+(intervalA023)*steps,intervalA023)
+
+gridA014 = np.arange(A014-intervalA014*steps,A014+(intervalA014)*steps,intervalA014)
+gridA024 = np.arange(A024-intervalA024*steps,A024+(intervalA024)*steps,intervalA024)
 
 chi1 = []
 chi2 = []
@@ -112,11 +127,9 @@ for i in range(10):
      for k in range(10):
       chi1[i][j].append([])
       for l in range(10):
-        chi1[i][j][k].append([np.sum((((A1-decay(t,gridm11[i],gridA011[j],gridm21[k],gridA021[l]))**2))/A1error**2)])
+        chi1[i][j][k].append(np.sum((((A1-decay(t,gridm11[i],gridA011[j],gridm21[k],gridA021[l]))**2))/A1error**2))
 
 chi1 = np.array(chi1)
-
-print(np.shape(chi1))
 
 for i in range(10):
   chi2.append([])
@@ -125,7 +138,7 @@ for i in range(10):
      for k in range(10):
       chi2[i][j].append([])
       for l in range(10):
-        chi2[i][j][k].append([np.sum((((A2-decay(t,gridm12[i],gridA012[j],gridm22[k],gridA022[l]))**2))/A2error**2)])
+        chi2[i][j][k].append(np.sum((((A2-decay(t,gridm12[i],gridA012[j],gridm22[k],gridA022[l]))**2))/A2error**2))
 
 chi2 = np.array(chi2)
 
@@ -136,7 +149,7 @@ for i in range(10):
      for k in range(10):
       chi3[i][j].append([])
       for l in range(10):
-        chi3[i][j][k].append([np.sum((((A3-decay(t,gridm13[i],gridA013[j],gridm23[k],gridA023[l]))**2))/A3error**2)])
+        chi3[i][j][k].append(np.sum((((A3-decay(t,gridm13[i],gridA013[j],gridm23[k],gridA023[l]))**2))/A3error**2))
 
 chi3 = np.array(chi3)
 
@@ -147,7 +160,7 @@ for i in range(10):
      for k in range(10):
       chi4[i][j].append([])
       for l in range(10):
-        chi4[i][j][k].append([np.sum((((A4-decay(t,gridm14[i],gridA014[j],gridm24[k],gridA024[l]))**2))/A4error**2)])
+        chi4[i][j][k].append(np.sum((((A4-decay(t,gridm14[i],gridA014[j],gridm24[k],gridA024[l]))**2))/A4error**2))
 
 chi4 = np.array(chi4)
 
@@ -166,114 +179,164 @@ index3 = np.unravel_index(np.argmin(chi3,axis=None),chi3.shape)
 index4 = np.unravel_index(np.argmin(chi4,axis=None),chi4.shape)
 
 #m11
-# plt.plot(gridm11,chi1[index1[0],index1[1],index1[2],:])
-# plt.axhline(y=(minchi1+2.3), color='r', linestyle='-')
-sigma1 = np.around((chi1[index1[0],index1[1],index1[2],:] - (minchi1+2.3) ),decimals=0)
-sigma1 = np.where(sigma1 == 0)[0]
-# print('decayconstant11', gridm11[index1[0]], '+/-', np.abs(gridm11[index1[0]]-gridm11[sigma1[0]]))
-# plt.show()
+plt.plot(gridm11,chi1[:,index1[1],index1[2],index1[3]])
+plt.axhline(y=(minchi1+4.72), color='r', linestyle='-')
+plt.title('m11')
+sigma1 = np.argwhere(np.diff(np.sign((np.min(chi1[:,index1[1],index1[2],index1[3]]) + 4.72)- chi1[:,index1[1],index1[2],index1[3]]))).flatten()
+print('decayconstant11', gridm11[index1[0]], '+/-', np.abs(gridm11[index1[0]]-(gridm11[sigma1[0]]+gridm11[sigma1[1]])/2))
+plt.show()
 
-#m11
-# plt.plot(gridm11,chi1[index1[0],index1[1],index1[2],:])
-# plt.axhline(y=(minchi1+2.3), color='r', linestyle='-')
-# print('decayconstant11', gridm11[index1[0]], '+/-', np.abs(gridm11[index1[0]]-gridm11[sigma1[0]]))
-# plt.show()
+print(sigma1)
 
 #m21
-# plt.plot(gridm21,chi1[index1[0],index1[1],index1[2],:])
-# plt.axhline(y=(minchi1+2.3), color='r', linestyle='-')
-# print('decayconstant21', gridm21[index1[0]], '+/-', np.abs(gridm21[index1[0]]-gridm21[sigma1[0]]))
-# plt.show()
+plt.plot(gridm21,chi1[index1[0],index1[1],:,index1[3]])
+plt.axhline(y=(minchi1+4.72), color='r', linestyle='-')
+plt.title('m21')
+sigma1 = np.argwhere(np.diff(np.sign(chi1[index1[0],index1[1],:,index1[3]] - (minchi1+4.72)))).flatten()
+print('decayconstant21', gridm21[index1[2]], '+/-', np.abs(gridm21[index1[2]]-(gridm21[sigma1[0]]+gridm21[sigma1[1]])/2))
+plt.show()
+
+print(sigma1)
 
 #A011
-# plt.plot(gridA011,chi1[index1[0],index1[1],index1[2],:])
-# plt.axhline(y=(minchi1+2.3), color='r', linestyle='-')
-# print('A011', gridA011[index1[0]], '+/-', np.abs(gridA011[index1[0]]-gridA011[sigma1[0]]))
-# plt.show()
+plt.plot(gridA011,chi1[index1[0],:,index1[2],index1[3]])
+plt.axhline(y=(minchi1+4.72), color='r', linestyle='-')
+plt.title('A011')
+sigma1 = np.argwhere(np.diff(np.sign(chi1[index1[0],:,index1[2],index1[3]] - (minchi1+4.72)))).flatten()
+print('A011', gridA011[index1[1]], '+/-', np.abs(gridA011[index1[1]]-(gridA011[sigma1[0]]+gridA011[sigma1[1]])/2))
+plt.show()
+
+print(sigma1)
 
 #A021
-# plt.plot(gridA021,chi1[index1[0],index1[1],index1[2],:])
-# plt.axhline(y=(minchi1+2.3), color='r', linestyle='-')
-# print('A021', gridA021[index1[0]], '+/-', np.abs(gridA021[index1[0]]-gridA021[sigma1[0]]))
-# plt.show()
+plt.plot(gridA021,chi1[index1[0],index1[1],index1[2],:])
+plt.axhline(y=(minchi1+4.72), color='r', linestyle='-')
+plt.title('A021')
+sigma1 = np.argwhere(np.diff(np.sign(chi1[index1[0],index1[1],index1[2],:] - (minchi1+4.72)))).flatten()
+print('A021', gridA021[index1[3]], '+/-', np.abs(gridA021[index1[3]]-(gridA021[sigma1[0]]+gridA021[sigma1[1]])/2))
+plt.show()
+
+print(sigma1)
 
 #m12
-# plt.plot(gridm12,chi2[index2[0],index2[1],index2[2],:])
-# plt.axhline(y=(minchi2+2.3), color='r', linestyle='-')
-sigma2 = np.around((chi2[index2[0],index2[1],index2[2],:] - (minchi2+2.3) - 0.5),decimals=0)
-sigma2 = np.where(sigma2 == 0)[0]
-# print('decayconstant12', gridm12[index2[0]], '+/-', np.abs(gridm12[index2[0]]-gridm12[sigma2[0]]))
-# plt.show()
+plt.plot(gridm12,chi2[:,index2[1],index2[2],index2[3]])
+plt.axhline(y=(minchi2+4.72), color='r', linestyle='-')
+plt.title('m12')
+sigma2 = np.argwhere(np.diff(np.sign(chi2[:,index2[1],index2[2],index2[3]] - (minchi2+4.72)))).flatten()
+print('decayconstant12', gridm12[index2[0]], '+/-', np.abs(gridm12[index2[0]]-(gridm12[sigma2[0]]+gridm12[sigma2[1]])/2))
+plt.show()
+
+print(sigma2)
 
 #m22
-# plt.plot(gridm22,chi2[index2[0],index2[1],index2[2],:])
-# plt.axhline(y=(minchi2+2.3), color='r', linestyle='-')
-# print('decayconstant22', gridm22[index2[0]], '+/-', np.abs(gridm22[index2[0]]-gridm22[sigma2[0]]))
-# plt.show()
+plt.plot(gridm22,chi2[index2[0],index2[1],:,index2[3]])
+plt.axhline(y=(minchi2+4.72), color='r', linestyle='-')
+plt.title('m22')
+sigma2 = np.argwhere(np.diff(np.sign(chi2[index2[0],index2[1],:,index2[3]] - (minchi2+4.72)))).flatten()
+print('decayconstant22', gridm22[index2[2]], '+/-', np.abs(gridm22[index2[2]]-(gridm22[sigma2[0]]+gridm22[sigma2[1]])/2))
+plt.show()
+
+print(sigma2)
 
 #A012
-# plt.plot(gridA022,chi2[index2[0],index2[1],index2[2],:])
-# plt.axhline(y=(minchi2+2.3), color='r', linestyle='-')
-# print('A012', gridA012[index2[0]], '+/-', np.abs(gridA012[index2[0]]-gridA012[sigma2[0]]))
-# plt.show()
+plt.plot(gridA022,chi2[index2[0],:,index2[2],index2[3]])
+plt.axhline(y=(minchi2+4.72), color='r', linestyle='-')
+plt.title('A012')
+sigma2 = np.argwhere(np.diff(np.sign(chi2[index2[0],:,index2[2],index2[3]] - (minchi2+4.72)))).flatten()
+print('A012', gridA012[index2[1]], '+/-', np.abs(gridA012[index2[1]]-(gridA012[sigma2[0]]+gridA012[sigma2[1]])/2))
+plt.show()
+
+print(sigma2)
 
 #A022
-# plt.plot(gridA022,chi2[index2[0],index2[1],index2[2],:])
-# plt.axhline(y=(minchi2+2.3), color='r', linestyle='-')
-# print('A022', gridA022[index2[0]], '+/-', np.abs(gridA022[index2[0]]-gridA022[sigma2[0]]))
-# plt.show()
+plt.plot(gridA022,chi2[index2[0],index2[1],index2[2],:])
+plt.axhline(y=(minchi2+4.72), color='r', linestyle='-')
+plt.title('A022')
+sigma2 = np.argwhere(np.diff(np.sign(chi2[index2[0],index2[1],index2[2],:] - (minchi2+4.72)))).flatten()
+print('A022', gridA022[index2[3]], '+/-', np.abs(gridA022[index2[3]]-(gridA022[sigma2[0]]+gridA022[sigma2[1]])/2))
+plt.show()
+
+print(sigma2)
 
 #m13
-# plt.plot(gridm13,chi3[index3[0],index3[1],index3[2],:])
-# plt.axhline(y=(minchi3+2.3), color='r', linestyle='-')
-sigma3 = np.around((chi3[index3[0],index3[1],index3[2],:] - (minchi3+2.3) ),decimals=0)
-sigma3 = np.where(sigma3 == 0)[0]
-# print('decayconstant13', gridm13[index3[0]], '+/-', np.abs(gridm13[index3[0]]-gridm13[sigma3[0]]))
-# plt.show()
+plt.plot(gridm13,chi3[:,index3[1],index3[2],index3[3]])
+plt.axhline(y=(minchi3+4.72), color='r', linestyle='-')
+plt.title('m13')
+sigma3 = np.argwhere(np.diff(np.sign(chi3[:,index3[1],index3[2],index3[3]] - (minchi3+4.72)))).flatten()
+print('decayconstant13', gridm13[index3[0]], '+/-', np.abs(gridm13[index3[0]]-(gridm13[sigma3[0]]+gridm13[sigma3[1]])/2))
+plt.show()
+
+print(sigma3)
 
 #m23
-# plt.plot(gridm23,chi3[index3[0],index3[1],index3[2],:])
-# plt.axhline(y=(minchi3+2.3), color='r', linestyle='-')
-# print('decayconstant23', gridm23[index3[0]], '+/-', np.abs(gridm23[index3[0]]-gridm23[sigma3[0]]))
-# plt.show()
+plt.plot(gridm23,chi3[index3[0],index3[1],:,index3[3]])
+plt.axhline(y=(minchi3+4.72), color='r', linestyle='-')
+plt.title('m23')
+sigma3 = np.argwhere(np.diff(np.sign(chi3[index3[0],index3[1],:,index3[3]] - (minchi3+4.72)))).flatten()
+print('decayconstant23', gridm23[index3[2]], '+/-', np.abs(gridm23[index3[2]]-(gridm23[sigma3[0]]+gridm23[sigma3[1]])/2))
+plt.show()
+
+print(sigma3)
 
 #A013
-# plt.plot(gridA013,chi3[index3[0],index3[1],index3[2],:])
-# plt.axhline(y=(minchi3+2.3), color='r', linestyle='-')
-# print('A013', gridA013[index3[0]], '+/-', np.abs(gridA013[index3[0]]-gridA013[sigma3[0]]))
-# plt.show()
+plt.plot(gridA013,chi3[index3[0],:,index3[2],index3[3]])
+plt.axhline(y=(minchi3+4.72), color='r', linestyle='-')
+plt.title('A013')
+sigma3 = np.argwhere(np.diff(np.sign(chi3[index3[0],:,index3[2],index3[3]] - (minchi3+4.72)))).flatten()
+print('A013', gridA013[index3[1]], '+/-', np.abs(gridA013[index3[1]]-(gridA013[sigma3[0]]+gridA013[sigma3[1]])/2))
+plt.show()
+
+print(sigma3)
 
 #A023
-# plt.plot(gridA023,chi3[index3[0],index3[1],index3[2],:])
-# plt.axhline(y=(minchi3+2.3), color='r', linestyle='-')
-# print('A023', gridA023[index3[0]], '+/-', np.abs(gridA023[index3[0]]-gridA023[sigma3[0]]))
-# plt.show()
+plt.plot(gridA023,chi3[index3[0],index3[1],index3[2],:])
+plt.axhline(y=(minchi3+4.72), color='r', linestyle='-')
+plt.title('A023')
+sigma3 = np.argwhere(np.diff(np.sign(chi3[index3[0],index3[1],index3[2],:] - (minchi3+4.72)))).flatten()
+print('A023', gridA023[index3[3]], '+/-', np.abs(gridA023[index3[3]]-(gridA023[sigma3[0]]+gridA023[sigma3[1]])/2))
+plt.show()
+
+print(sigma3)
 
 # m14
-# plt.plot(gridm14,chi4[index4[0],index4[1],index4[2],:])
-# plt.axhline(y=(minchi4+2.3), color='r', linestyle='-')
-sigma4 = np.around((chi4[index4[0],index4[1],index4[2],:] - (minchi4+2.3) ),decimals=0)
-sigma4 = np.where(sigma4 == 0)[0]
-# print('decayconstant14', gridm14[index4[0]], '+/-', np.abs(gridm14[index4[0]]-gridm14[sigma4[0]]))
-# plt.show()
+plt.plot(gridm14,chi4[:,index4[1],index4[2],index4[3]])
+plt.axhline(y=(minchi4+4.72), color='r', linestyle='-')
+plt.title('m14')
+sigma4 = np.argwhere(np.diff(np.sign(chi4[:,index4[1],index4[2],index4[3]] - (minchi4+4.72)))).flatten()
+print('decayconstant14', gridm14[index4[0]], '+/-', np.abs(gridm14[index4[0]]-(gridm14[sigma4[0]]+gridm14[sigma4[1]])/2))
+plt.show()
+
+print(sigma4)
 
 #m24
-# plt.plot(gridm24,chi4[index4[0],index4[1],index4[2],:])
-# plt.axhline(y=(minchi4+2.3), color='r', linestyle='-')
-# print('decayconstant24', gridm24[index4[0]], '+/-', np.abs(gridm24[index4[0]]-gridm24[sigma4[0]]))
-# plt.show()
+plt.plot(gridm24,chi4[index4[0],index4[1],:,index4[3]])
+plt.axhline(y=(minchi4+4.72), color='r', linestyle='-')
+plt.title('m24')
+sigma4 = np.argwhere(np.diff(np.sign(chi4[index4[0],index4[1],:,index4[3]] - (minchi4+4.72)))).flatten()
+print('decayconstant24', gridm24[index4[2]], '+/-', np.abs(gridm24[index4[2]]-(gridm24[sigma4[0]]+gridm24[sigma4[1]])/2))
+plt.show()
+
+print(sigma4)
 
 #A014
-# plt.plot(gridA014,chi4[index4[0],index4[1],index4[2],:])
-# plt.axhline(y=(minchi4+2.3), color='r', linestyle='-')
-# print('A014', gridA014[index4[0]], '+/-', np.abs(gridA014[index4[0]]-gridA014[sigma4[0]]))
-# plt.show()
+plt.plot(gridA014,chi4[index4[0],:,index4[2],index4[3]])
+plt.axhline(y=(minchi4+4.72), color='r', linestyle='-')
+plt.title('A014')
+sigma4 = np.argwhere(np.diff(np.sign(chi4[index4[0],:,index4[2],index4[3]] - (minchi4+4.72)))).flatten()
+print('A014', gridA014[index4[1]], '+/-', np.abs(gridA014[index4[1]]-(gridA014[sigma4[0]]+gridA014[sigma4[1]])/2))
+plt.show()
+
+print(sigma4)
 
 #A024
-# plt.plot(gridA024,chi4[index4[0],index4[1],index4[2],:])
-# plt.axhline(y=(minchi4+2.3), color='r', linestyle='-')
-# print('A024', gridA024[index4[0]], '+/-', np.abs(gridA024[index4[0]]-gridA024[sigma4[0]]))
-# plt.show()
+plt.plot(gridA024,chi4[index4[0],index4[1],index4[2],:])
+plt.axhline(y=(minchi4+4.72), color='r', linestyle='-')
+plt.title('A024')
+sigma4 = np.argwhere(np.diff(np.sign(chi4[index4[0],index4[1],index4[2],:] - (minchi4+4.72)))).flatten()
+print('A024', gridA024[index4[3]], '+/-', np.abs(gridA024[index4[3]]-(gridA024[sigma4[0]]+gridA024[sigma4[1]])/2))
+plt.show()
+
+print(sigma4)
 
 #AIC and BIC
 
@@ -311,34 +374,36 @@ sigma4 = np.where(sigma4 == 0)[0]
 #halflife = 0.693/decayconstant
 
 halflife11 = 0.693/gridm11[index1[0]]
-halflife21 = 0.693/gridm21[index1[0]]
+halflife21 = 0.693/gridm21[index1[2]]
 halflife12 = 0.693/gridm12[index2[0]]
-halflife22 = 0.693/gridm22[index2[0]]
+halflife22 = 0.693/gridm22[index2[2]]
 halflife13 = 0.693/gridm13[index3[0]]
-halflife23 = 0.693/gridm23[index3[0]]
+halflife23 = 0.693/gridm23[index3[2]]
 halflife14 = 0.693/gridm14[index4[0]]
-halflife24 = 0.693/gridm24[index4[0]]
+halflife24 = 0.693/gridm24[index4[2]]
 
 #how do i find the uncertainty im dumb
 
-# halferror11 = 0.693/(np.abs(gridm11[index1[0]]-gridm11[sigma1[0]]))
-# halferror21 = 0.693/(np.abs(gridm12[index1[0]]-gridm12[sigma1[0]]))
-# halferror12 = 0.693/(np.abs(gridm21[index2[0]]-gridm21[sigma2[0]]))
-# halferror22 = 0.693/(np.abs(gridm22[index2[0]]-gridm22[sigma2[0]]))
-# halferror13 = 0.693/(np.abs(gridm13[index3[0]]-gridm13[sigma3[0]]))
-# halferror23 = 0.693/(np.abs(gridm23[index3[0]]-gridm23[sigma3[0]]))
-# halferror14 = 0.693/(np.abs(gridm14[index4[0]]-gridm14[sigma4[0]]))
-# halferror24 = 0.693/(np.abs(gridm24[index4[0]]-gridm24[sigma4[0]]))
+#(0.693/decayconstant**2)*errordecayconstant
+
+halferror11 = (0.693/gridm11[index1[0]])*(np.abs(gridm11[index1[0]]-(gridm11[sigma1[0]]+gridm11[sigma1[1]])/2))
+halferror21 = (0.693/gridm21[index1[2]])*(np.abs(gridm21[index1[2]]-(gridm21[sigma1[0]]+gridm21[sigma1[1]])/2))
+halferror12 = (0.693/gridm12[index2[0]])*(np.abs(gridm12[index2[0]]-(gridm12[sigma2[0]]+gridm12[sigma2[1]])/2))
+halferror22 = (0.693/gridm22[index2[2]])*(np.abs(gridm22[index2[2]]-(gridm22[sigma2[0]]+gridm22[sigma2[1]])/2))
+halferror13 = (0.693/gridm13[index3[0]])*(np.abs(gridm13[index3[0]]-(gridm13[sigma3[0]]+gridm13[sigma3[1]])/2))
+halferror23 = (0.693/gridm23[index3[2]])*(np.abs(gridm23[index3[2]]-(gridm23[sigma3[0]]+gridm23[sigma3[1]])/2))
+halferror14 = (0.693/gridm14[index4[0]])*(np.abs(gridm14[index4[0]]-(gridm14[sigma4[0]]+gridm14[sigma4[1]])/2))
+halferror24 = (0.693/gridm24[index4[2]])*(np.abs(gridm24[index4[2]]-(gridm24[sigma4[0]]+gridm24[sigma4[1]])/2))
 
 
-# print('halflife11', halflife11, '+/-', halferror11)
-# print('halflife21', halflife12, '+/-', halferror21)
-# print('halflife12', halflife21, '+/-', halferror12)
-# print('halflife22', halflife22, '+/-', halferror22)
-# print('halflife13', halflife13, '+/-', halferror13)
-# print('halflife23', halflife23, '+/-', halferror23)
-# print('halflife14', halflife14, '+/-', halferror14)
-# print('halflife24', halflife24, '+/-', halferror24)
+print('halflife11', halflife11, '+/-', halferror11)
+print('halflife21', halflife12, '+/-', halferror21)
+print('halflife12', halflife21, '+/-', halferror12)
+print('halflife22', halflife22, '+/-', halferror22)
+print('halflife13', halflife13, '+/-', halferror13)
+print('halflife23', halflife23, '+/-', halferror23)
+print('halflife14', halflife14, '+/-', halferror14)
+print('halflife24', halflife24, '+/-', halferror24)
 
 #they are annoyingly different values
 
@@ -425,7 +490,6 @@ print('powerlaw index', gridm[index1[0]], '+/-',np.abs(gridm[index1[0]]-((gridm[
 plt.show()
 
 #need to find how many particles are in the sample
-
 
 
 
