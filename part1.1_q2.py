@@ -65,11 +65,17 @@ def bootstrap(y,y2,t,yerror,allm,allA0):
     #5) Repeat this process as many times as possible 
 
     #step 1 - residuals - not sure if the errors of residuals are right or not
+
+    residual = y-y2
+    residualerror = yerror
+
+
+
     for j in range(3000):
-        residual = y-y2
-        plt.plot(t,residual,'o')
-        residualerror = yerror
-        plt.errorbar(t,residual,yerr=residualerror, ls = 'none')
+        # residual = y-y2
+        # plt.plot(t,residual,'o')
+        # residualerror = yerror
+        # plt.errorbar(t,residual,yerr=residualerror, ls = 'none')
 
         #step 2 - label points - already done from eg y[0] is first data point
 
@@ -77,16 +83,27 @@ def bootstrap(y,y2,t,yerror,allm,allA0):
         #need to generate random numbers then change [number] to [new number]
         random = np.random.randint(0,len(residual), size=len(residual))
 
-        for i in range(len(residual)):
-            residual[i] = residual[random[i]]
-            residualerror[i] = residualerror[random[i]]
+        # for i in range(len(residual)):
+        #     residual[i] = residual[random[i]]
+        #     residualerror[i] = residualerror[random[i]]
 
-        y = residual + y2
-        yerror = residualerror
+        randomResiduals = []
+        randomResidualsError = []
+        
+        for element in random:
+            randomResiduals.append(residual[element])
+            randomResidualsError.append(residualerror[element])
+
+
+        newModel = randomResiduals + y2
+        newModelerror = randomResidualsError
+
+        # y = residual + y2
+        # yerror = residualerror
 
         #step 4 = recalculate the best fit slope and intercept and store the results (step 5 - repeat as many times as possible)
-        m,c = leastsquares(t,y,yerror)
-        y2 = m * t + c
+        m,c = leastsquares(t,newModel,newModelerror)
+        # y2 = m * t + c
 
         A0 = np.exp(c)
 
@@ -98,8 +115,6 @@ def bootstrap(y,y2,t,yerror,allm,allA0):
 allm, allA0 = bootstrap(y,y2,t,yerror,allm,allA0)
 
 # the first histogram is always messed up, not sure why
-y,x,_=plt.hist(allm, bins = 50)
-plt.show()
 y,x,_=plt.hist(allm, bins = 50)
 plt.show()
 y,x,_=plt.hist(allA0, bins = 50)
